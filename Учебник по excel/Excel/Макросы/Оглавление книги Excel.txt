@@ -1,0 +1,12 @@
+Sub SheetList()
+   Dim sheet As Worksheet
+   Dim cell As Range
+   With ActiveWorkbook
+      For Each sheet In ActiveWorkbook.Worksheets
+         Set cell = Worksheets(1).Cells(sheet.Index, 1)
+         .Worksheets(1).Hyperlinks.Add anchor:=cell, Address:="", _
+                    SubAddress:="'" & sheet.Name & "'" & "!A1"
+         cell.Formula = sheet.Name
+      Next
+   End With
+End Sub

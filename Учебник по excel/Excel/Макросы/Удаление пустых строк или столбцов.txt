@@ -1,0 +1,16 @@
+Sub DeleteEmptyRows()
+    LastRow = ActiveSheet.UsedRange.Row - 1 + ActiveSheet.UsedRange.Rows.Count
+    Application.ScreenUpdating = False
+    For K = LastRow To 1 Step -1
+        If Application.CountA(Rows(K)) = 0 Then Rows(K).Delete
+    Next K
+End Sub
+
+Sub DeleteEmptyColumns()
+    LastColumn = ActiveSheet.UsedRange.Column - 1 + ActiveSheet.UsedRange.Columns.Count
+    Application.ScreenUpdating = False
+    For N = LastColumn To 1 Step -1
+        If Application.CountA(Columns(N)) = 0 Then Columns(N).Delete
+    Next N
+End Sub
+

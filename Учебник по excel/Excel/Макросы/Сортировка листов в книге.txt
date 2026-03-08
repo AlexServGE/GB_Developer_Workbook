@@ -1,0 +1,11 @@
+Sub SortSheets()
+    Dim I As Integer, J As Integer
+
+    For I = 1 To Sheets.Count - 1
+        For J = I + 1 To Sheets.Count
+            If UCase(Sheets(I).Name) > UCase(Sheets(J).Name) Then
+                Sheets(J).Move Before:=Sheets(I)
+            End If
+        Next J
+    Next I
+End Sub 
