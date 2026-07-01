@@ -1,0 +1,47 @@
+---
+description: Конвенции справочника Vue API (MD, XLSX) в этом проекте
+globs: application-api.md,application-api.xlsx,general-api.md,general-api.xlsx,lifecycle-hooks-api.md,lifecycle-hooks-api.xlsx,composition-api-setup.md,composition-api-setup.xlsx,reactivity-utilities-api.md,reactivity-utilities-api.xlsx,reactivity-core-api.md,reactivity-core-api.xlsx,scripts/**/*.py,requirements.txt
+alwaysApply: false
+---
+
+# Vue API Reference — конвенции проекта
+
+## Источник и язык
+
+- Официальный источник: https://vuejs.org/api/
+- Имена API — на **английском** (`createApp()`, `app.config.errorHandler`)
+- Описания, детали, категории — на **русском**
+
+## Markdown (`application-api.md`)
+
+Таблица Application API: **каждый API — отдельная строка** (25 строк для Application API).
+
+Колонки (строго в этом порядке):
+
+| API | Описание | По умолчанию | Пример | Детали | Ссылки |
+
+- Колонки «Тип» и «Версия» **не использовать**
+- Примеры кода — **прямо в ячейке «Пример»**, не ссылками на блок ниже
+- Для многострочного кода в MD-таблице: `<pre><code>...<br>...</code></pre>`
+- Символ `|` внутри примеров ломает парсер — учитывать при правках (скрипт XLSX сливает лишние сегменты)
+
+## XLSX (`application-api.xlsx`)
+
+Генерация из MD по образцу `4*.xlsx`:
+
+```powershell
+py -3 scripts/generate-application-api-xlsx.py
+```
+
+- Колонка «По умолчанию» = **категория назначения** («Для создания приложения», «Глобальный компонент»…), не raw default
+- Реальные defaults из MD — в колонке «Пример» как `//по умолчанию ...`
+- Стили, ширины колонок, секционные заголовки и гиперссылки — из template xlsx
+- После правок MD перегенерировать xlsx скриптом
+
+## Структура секций (Application API)
+
+Секционные заголовки перед группами: создание приложения → глобальные значения → тестирование → плагины → mixins → версия → отладка → сборка → mixins (optionMergeStrategies) → idPrefix.
+
+## Зависимости
+
+- Python 3: `py -3 -m pip install -r requirements.txt` (openpyxl)
